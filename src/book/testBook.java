@@ -40,11 +40,11 @@ public class testBook {
         System.out.println("Enter a book name for price: ");
         String inputName = scanner.nextLine();
         System.out.println(binarySearch(a,inputName));
-//        System.out.println("\nBefore sort:");
-//        display(a);
-//        selectionSort(a);
-//        System.out.println("\nAfter sort by price:");
-//        display(a);
+        System.out.println("\nBefore sort:");
+        display(a);
+        selectionSort(a);
+        System.out.println("\nAfter sort by price:");
+        display(a);
     }
 
     public static double linearSearch(Book[] a, String name) {
@@ -112,7 +112,7 @@ public class testBook {
         while (last>=first){
             mid = (first+last)/2;
             if (a[mid].getName().compareToIgnoreCase(name)==0) return a[mid].getPrice();
-            else if (a[mid].getName().compareToIgnoreCase(name)==-1) first = mid + 1;
+            else if (a[mid].getName().compareToIgnoreCase(name)<0) first = mid + 1;
             else last = mid - 1;
         }
         return -1;
