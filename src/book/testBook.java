@@ -1,6 +1,7 @@
 package book;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -36,15 +37,14 @@ public class testBook {
 
         System.out.println("Java programming book total is: "+count);
         Scanner scanner = new Scanner(System.in);
-//        System.out.println("Enter a book name for price: ");
-//        String inputName = scanner.nextLine();
-//        System.out.println(linearSearch(a,inputName));
-
-        System.out.println("\nBefore sort:");
-        display(a);
-        selectionSort(a);
-        System.out.println("\nAfter sort by price:");
-        display(a);
+        System.out.println("Enter a book name for price: ");
+        String inputName = scanner.nextLine();
+        System.out.println(binarySearch(a,inputName));
+//        System.out.println("\nBefore sort:");
+//        display(a);
+//        selectionSort(a);
+//        System.out.println("\nAfter sort by price:");
+//        display(a);
     }
 
     public static double linearSearch(Book[] a, String name) {
@@ -102,5 +102,28 @@ public class testBook {
             a[minIndex] = a[i];
             a[i] = temp;
         }
+    }
+
+    public static double binarySearch(Book[] a, String name){
+        sortName(a);
+        int first = 0;
+        int last = a.length-1;
+        int mid;
+        while (last>=first){
+            mid = (first+last)/2;
+            if (a[mid].getName().compareToIgnoreCase(name)==0) return a[mid].getPrice();
+            else if (a[mid].getName().compareToIgnoreCase(name)==-1) first = mid + 1;
+            else last = mid - 1;
+        }
+        return -1;
+    }
+
+    public static void sortName(Book[] a) {
+        Arrays.sort(a, new Comparator<Book>() {
+            @Override
+            public int compare(Book o1, Book o2) {
+                return o1.getName().compareToIgnoreCase(o2.getName());
+            }
+        });
     }
 }
